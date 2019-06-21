@@ -4,6 +4,7 @@ import com.changan.securitydemo.security.MyRemoteTokenServices;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.base.Predicate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,6 +18,9 @@ import java.util.Collection;
 
 @Configuration
 public class OAuthTokenConfig {
+
+    @Autowired
+    private TokenCheckInfoConfig tokenCheckInfoConfig;
 
     @Primary
     @Bean
@@ -34,9 +38,9 @@ public class OAuthTokenConfig {
 
         restTemplate.setMessageConverters(Lists.newArrayList(converts));
         tokenService.setRestTemplate(restTemplate);
-        tokenService.setCheckTokenEndpointUrl("http://localhost:8080/oauth/check_token");
-        tokenService.setClientId("zab");
-        tokenService.setClientSecret("zab");
+        tokenService.setCheckTokenEndpointUrl(tokenCheckInfoConfig.getCheckToken());
+        tokenService.setClientId(tokenCheckInfoConfig.getClientId());
+        tokenService.setClientSecret(tokenCheckInfoConfig.getSecret());
         tokenService.setAccessTokenConverter(tokenConverter);
         return tokenService;
     }
