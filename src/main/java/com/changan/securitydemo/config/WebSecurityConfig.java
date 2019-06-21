@@ -41,7 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserService); //user Details Service验证
+        //user Details Service验证
+        auth.userDetailsService(customUserService);
+       /* auth.inMemoryAuthentication()
+                .withUser("zab")
+                .password("zab")
+                .authorities("ROLE_USER");*/
     }
 
     @Override
@@ -49,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/css/**").permitAll()//允许访问静态资源
                 .antMatchers("/oauth/authorize").permitAll()
+                .antMatchers("/oauth/token").permitAll()
                 .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
                 .formLogin()
@@ -60,7 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/favor.ico");
+        web.ignoring().antMatchers("/static/**");
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.changan.securitydemo.dao.PermissionDao">
     <select id="findAll"  resultType="com.changan.securitydemo.entity.SysPermission">
-        SELECT * from Sys_permission ;
+        SELECT * from sys_permission ;
     </select>
 
     <select id="findByAdminUserId" parameterType="int" resultType="com.changan.securitydemo.entity.SysPermission">

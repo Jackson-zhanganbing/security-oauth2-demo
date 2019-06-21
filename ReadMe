@@ -1,0 +1,13 @@
+1、获取用户授权，并在回调地址中获取code
+http://localhost:8080/oauth/authorize?client_id=zab&response_type=code&redirect_uri=http://www.baidu.com
+2、用code获取token
+http://localhost:8080/oauth/token
+参数：
+code:Vr7CHD
+grant_type:authorization_code
+redirect_uri:http://www.baidu.com
+state:xxxx
+client_id:zab
+client_secret:zab
+3、使用token访问受限接口
+http://localhost:8080/admin?access_token=64844862-23e3-4730-977c-48cb2dcad12b

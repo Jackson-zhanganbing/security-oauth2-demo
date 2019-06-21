@@ -31,6 +31,7 @@ public class CustomUserService implements UserDetailsService {
     @Autowired
     private PermissionDao permissionDao;
 
+    @Override
     public UserDetails loadUserByUsername(String username) {
         SysUser user = userDao.findByUserName(username);
         if (user != null) {
