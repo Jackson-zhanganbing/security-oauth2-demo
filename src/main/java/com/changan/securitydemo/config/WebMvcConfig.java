@@ -28,7 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         //访问login路径，会跳转到login.html页面中
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/error").setViewName("home");
+        //registry.addViewController("/error").setViewName("home");
     }
 
 

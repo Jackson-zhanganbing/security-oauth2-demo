@@ -16,8 +16,8 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/")
-    public String index(Model model){
-        Msg msg =  new Msg("测试标题","测试内容","欢迎来到HOME页面,您拥有 ROLE_HOME 权限");
+    public String index(Model model) {
+        Msg msg = new Msg("测试标题", "测试内容", "欢迎来到HOME页面,您拥有 ROLE_HOME 权限");
         model.addAttribute("msg", msg);
         return "home";
     }
@@ -25,9 +25,16 @@ public class UserController {
 
     @RequestMapping("/admin")
     @ResponseBody
-    @PreAuthorize("isAuthenticated()")
-    public String hello(){
+    @PreAuthorize("#oauth2.hasScope('oauth2-resource') and  hasAuthority('ROLE_ADMIN')")
+    public String admin() {
         return "hello admin";
+    }
+
+    @RequestMapping("/hello")
+    @ResponseBody
+    @PreAuthorize("#oauth2.hasScope('open') and  hasAuthority('ROLE_ADMIN')")
+    public String hello() {
+        return "hello";
     }
 
 

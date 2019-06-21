@@ -40,9 +40,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new JdbcClientDetailsService(dataSource);
     }
 
-    //localhost:8080/oauth/authorize?client_id=client&response_type=code&redirect_uri=http://www.baidu.com
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         // 配置TokenServices参数
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
@@ -51,7 +50,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer securityConfigurer) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer securityConfigurer) {
         //securityConfigurer.checkTokenAccess("isAuthenticated()");
         securityConfigurer.allowFormAuthenticationForClients();//允许客户表单认证
         securityConfigurer.checkTokenAccess("permitAll()");//对于CheckEndpoint控制器[框架自带的校验]的/oauth/check端点允许所有客户端发送器请求而不会被Spring-security拦截
