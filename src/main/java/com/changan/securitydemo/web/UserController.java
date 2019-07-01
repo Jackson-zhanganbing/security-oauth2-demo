@@ -32,7 +32,7 @@ public class UserController {
 
     @RequestMapping("/hello")
     @ResponseBody
-    @PreAuthorize("#oauth2.hasScope('open') and  hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     public String hello() {
         return "hello";
     }

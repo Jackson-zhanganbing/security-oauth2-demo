@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2018/11/25/   22:13
  */
 @Service
-public class CustomUserService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;

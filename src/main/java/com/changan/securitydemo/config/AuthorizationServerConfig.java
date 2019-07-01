@@ -1,6 +1,6 @@
 package com.changan.securitydemo.config;
 
-import com.changan.securitydemo.security.CustomUserService;
+import com.changan.securitydemo.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private TokenStore tokenStore;
     @Autowired
-    private CustomUserService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public TokenStore tokenStore() {
@@ -53,7 +53,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerSecurityConfigurer securityConfigurer) {
         //securityConfigurer.checkTokenAccess("isAuthenticated()");
         securityConfigurer.allowFormAuthenticationForClients();//允许客户表单认证
-        securityConfigurer.checkTokenAccess("permitAll()");//对于CheckEndpoint控制器[框架自带的校验]的/oauth/check端点允许所有客户端发送器请求而不会被Spring-security拦截
+        //对于CheckEndpoint控制器[框架自带的校验]的/oauth/check端点允许所有客户端发送器请求而不会被Spring-security拦截
+        securityConfigurer.checkTokenAccess("permitAll()");
     }
 
     @Override
